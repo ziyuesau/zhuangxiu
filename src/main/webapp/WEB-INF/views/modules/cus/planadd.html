@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>添加装修方案</title>
+    <link rel="shortcut icon" href="favicon.ico">
+	
+    <link href="${request.contextPath}/static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="${request.contextPath}/static/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="${request.contextPath}/static/admin/css/animate.min.css" rel="stylesheet">
+    <link href="${request.contextPath}/static/admin/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="${request.contextPath}/static/admin/css/style.min.css?v=4.1.0" rel="stylesheet">	
+	<link href="${request.contextPath}/static/admin/js/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet">
+    <link href="${request.contextPath}/static/admin/js/layui/css/layui.css"rel="stylesheet">
+    
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>添加装修方案</h5>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="postForm" method="post" action="${request.contextPath}/cus/plan/save">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">面积：</label>
+                            <div class="input-group col-sm-4">
+                                <input id="size" type="text" class="form-control" name="size" required="" aria-required="true" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">格局：</label>
+                            <div class="input-group col-sm-4">
+                                
+										     <select class="form-control" name="geju" required="" aria-required="true">
+							   <option value="0">请选择</option>
+					<#if geju?exists>  
+                             <#list geju as item>
+                                  <option value="${item.id}"   >${item.name}</option>
+				     </#list>  
+					</#if> 
+	 </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">档次：</label>
+                            <div class="input-group col-sm-4">
+                                <select class="form-control" name="dangci" required="" aria-required="true">
+                                     <option value=""  >请选择</option>
+                                    <option value="1"    >普通</option>
+									<option value="2"   >精选</option>
+									<option value="3"   >豪华</option>
+									
+                                   
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">风格：</label>
+                            <div class="input-group col-sm-4">
+                                <select class="form-control" name="style" required="" aria-required="true">
+                                     <option value=""  >请选择</option>
+                                    <option value="1"    >现代简约风格</option>
+									<option value="2"   >欧式古典风格</option>
+									<option value="3"   >恬淡田园风格</option>
+									<option value="4"   >新中式风格</option>
+									<option value="5"   >地中海风格</option>
+                                   
+                                </select>
+                            </div>
+                        </div>
+                        
+                         
+                         
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">预计用时：</label>
+                            <div class="input-group col-sm-4">
+                                <input id="yongshi" type="text" class="form-control" name="yongshi" required="" aria-required="true" value="">
+                            </div>
+                        </div>
+                           
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">基础价格：</label>
+                            <div class="input-group col-sm-4">
+                                <input id="price" type="text" class="form-control" name="price" required="" aria-required="true" value="">
+                            </div>
+                        </div>
+                         <div class="form-group">
+                            <label class="col-sm-3 control-label">方案介绍：</label>
+                            <div class="input-group col-sm-4">
+                                 <textarea rows="5" id="description" type="text" class="form-control" name="description" required="" aria-required="true" value=""></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">瓷砖：</label>
+                            <div class="input-group col-sm-4">
+                               
+								     <select class="form-control" name="cizhuan" required="" aria-required="true">
+							   <option value="0">请选择</option>
+					<#if cizhuan?exists>  
+                             <#list cizhuan as item>
+                                  <option value="${item.id}"   >${item.name}</option>
+				     </#list>  
+					</#if> 
+	 </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">地板：</label>
+                            <div class="input-group col-sm-4">
+                                <select class="form-control" name="diban" required="" aria-required="true">
+							   <option value="0">请选择</option>
+					<#if diban?exists>  
+                             <#list diban as item>
+                                  <option value="${item.id}"   >${item.name}</option>
+				     </#list>  
+					</#if> 
+	 </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">灯具：</label>
+                            <div class="input-group col-sm-4">
+                                 <select class="form-control" name="bizhi" required="" aria-required="true">
+							   <option value="0">请选择</option>
+					<#if bizhi?exists>  
+                             <#list bizhi as item>
+                                  <option value="${item.id}"   >${item.name}</option>
+				     </#list>  
+					</#if> 
+	 </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">涂料：</label>
+                            <div class="input-group col-sm-4">
+                                
+								  <select class="form-control" name="men" required="" aria-required="true">
+							   <option value="0">请选择</option>
+					<#if men?exists>  
+                             <#list men as item>
+                                  <option value="${item.id}"   >${item.name}</option>
+				     </#list>  
+					</#if> 
+	 </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">卫浴：</label>
+                            <div class="input-group col-sm-4">
+                               
+								  <select class="form-control" name="weiyu" required="" aria-required="true">
+							   <option value="0">请选择</option>
+					<#if weiyu?exists>  
+                             <#list weiyu as item>
+                                  <option value="${item.id}"   >${item.name}</option>
+				     </#list>  
+					</#if> 
+	 </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">水工人数：</label>
+                            <div class="input-group col-sm-4">
+                                <input id="people1" type="text" class="form-control" name="people1" required="" aria-required="true" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">电工人数：</label>
+                            <div class="input-group col-sm-4">
+                                <input id="people2" type="text" class="form-control" name="people2" required="" aria-required="true" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">油工人数：</label>
+                            <div class="input-group col-sm-4">
+                                <input id="people3" type="text" class="form-control" name="people3" required="" aria-required="true" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">木工人数：</label>
+                            <div class="input-group col-sm-4">
+                                <input id="people4" type="text" class="form-control" name="people4" required="" aria-required="true" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">瓦工人数：</label>
+                            <div class="input-group col-sm-4">
+                                <input id="people5" type="text" class="form-control" name="people5" required="" aria-required="true" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-6">
+                                <!--<input type="button" value="提交" class="btn btn-primary" id="postform"/>-->
+                                <button class="btn btn-primary" type="button" id="post">提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="${request.contextPath}/static/admin/js/jquery.min.js?v=2.1.4"></script>
+<script src="${request.contextPath}/static/admin/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="${request.contextPath}/static/admin/js/content.min.js?v=1.0.0"></script>
+<script src="${request.contextPath}/static/admin/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="${request.contextPath}/static/admin/js/plugins/validate/messages_zh.min.js"></script>
+<script src="${request.contextPath}/static/admin/js/plugins/iCheck/icheck.min.js"></script>
+<script src="${request.contextPath}/static/admin/js/plugins/layer/layer.min.js"></script>
+<script src="${request.contextPath}/static/admin/js/plugins/layer/laydate/laydate.js"></script>
+<script src="${request.contextPath}/static/admin/js/jquery.form.js"></script>
+<script src="${request.contextPath}/static/admin/js/layui/layui.js"></script>
+<script src="${request.contextPath}/static/admin/js/plugins/ueditor/ueditor.config.js"></script>
+<script src="${request.contextPath}/static/admin/js/plugins/ueditor/ueditor.all.js"></script>
+<script type="text/javascript" src="${request.contextPath}/statics/js/jquery.serializejson.min.js"></script>
+<script type="text/javascript">
+
+    var index = '';
+    function showStart(){
+        index = layer.load(0, {shade: false});
+        return true;
+    }
+	$("#post").click(function(){
+	
+			if(!$('#postForm').valid()) {//判断校检是否通过
+     
+					return;
+			} 
+			showStart();
+	 $.ajax({
+                    type: "POST",
+                    url: "${request.contextPath}/cus/plan/save",
+                    contentType: "application/json",
+                    data: JSON.stringify($('#postForm').serializeJSON()),
+					 dataType: 'json',
+                    success: function(res){
+				 
+                        if(0 == res.code){
+						layer.alert("添加成功", {title: '友情提示', icon: 1, closeBtn: 0}, function(){
+                          window.location.href = "${request.contextPath}/modules/cus/plan1.html";
+                    });
+					} else{
+						layer.alert(res.msg, {title: '友情提示', icon: 2});
+					}
+                    }
+                });
+	}); 
+     
+
+
+    $(document).ready(function(){
+        $(".i-checks").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green",});
+		
+        
+    });
+
+    // 表单验证
+    $.validator.setDefaults({
+        highlight: function(e) {
+            $(e).closest(".form-group").removeClass("has-success").addClass("has-error")
+        },
+        success: function(e) {
+            e.closest(".form-group").removeClass("has-error").addClass("has-success")
+        },
+        errorElement: "span",
+        errorPlacement: function(e, r) {
+            e.appendTo(r.is(":radio") || r.is(":checkbox") ? r.parent().parent().parent() : r.parent())
+        },
+        errorClass: "help-block m-b-none",
+        validClass: "help-block m-b-none"
+    });
+
+</script>
+</body>
+</html>

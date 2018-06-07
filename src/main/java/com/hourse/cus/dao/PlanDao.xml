@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hourse.cus.dao.PlanDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.hourse.cus.entity.PlanEntity" id="planMap">
+        <result property="id" column="id"/>
+        <result property="size" column="size"/>
+        <result property="geju" column="geju"/>
+        <result property="dangci" column="dangci"/>
+        <result property="style" column="style"/>
+        <result property="description" column="description"/>
+        <result property="pic" column="pic"/>
+        <result property="price" column="price"/>
+        <result property="yongshi" column="yongshi"/>
+        <result property="userId" column="user_id"/>
+        <result property="sizeBegin" column="size_begin"/>
+        <result property="sizeEnd" column="size_end"/>
+        <result property="cizhuan" column="cizhuan"/>
+        <result property="diban" column="diban"/>
+        <result property="bizhi" column="bizhi"/>
+        <result property="men" column="men"/>
+        <result property="weiyu" column="weiyu"/>
+        <result property="people1" column="people1"/>
+        <result property="people2" column="people2"/>
+        <result property="people3" column="people3"/>
+        <result property="people4" column="people4"/>
+        <result property="people5" column="people5"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.hourse.cus.entity.PlanEntity">
+		select * from t_plan where id = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.hourse.cus.entity.PlanEntity">
+		select a.*,u.realname as company_name,u.phone as phone,g.name as geju_name,b.name as cizhuan_name ,c.name as diban_name,d.name as bizhi_name,e.name as men_name ,f.name as weiyu_name  from t_plan a left join t_material b on a.cizhuan=b.id
+		 left join t_material c on a.diban=c.id 
+		  left join t_material d on a.bizhi=d.id 
+		   left join t_material e on a.men=e.id 
+		    left join t_material f on a.weiyu=f.id  
+		    left join t_geju g on a.geju=g.id
+		    left join sys_user u on a.user_id=u.user_id 
+		<where>
+			<if test="name != null and name.trim() != ''">
+				and  `name` like concat('%',#{name},'%')
+			</if>
+			<if test="sizetext != null  and sizetext.trim() != ''">
+				and  `size_begin` &lt;=#{sizetext}
+				and  `size_end` &gt;=#{sizetext}   
+			</if>
+ 			<if test="geju != null and geju.trim() != ''">
+				and  `geju` =#{geju} 
+			</if>
+					<if test="style != null and style.trim() != ''">
+				and  `style` =#{style} 
+			</if>
+			<if test="dangci != null and dangci.trim() != ''">
+				and  `dangci` =#{dangci} 
+			</if>
+			<if test="userId != null ">
+				and  a.`user_id` =#{userId} 
+			</if>
+		</where>
+		
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by id asc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from t_plan 
+		<where>
+			<if test="name != null and name.trim() != ''">
+				and  `name` like concat('%',#{name},'%')
+			</if>
+			<if test="sizetext != null  and sizetext.trim() != ''">
+				and  `size_begin` &lt;=#{sizetext}
+				and  `size_end` &gt;=#{sizetext}  
+			</if>
+ 			<if test="geju != null and geju.trim() != ''">
+				and  `geju` =#{geju} 
+			</if>
+					<if test="style != null and style.trim() != ''">
+				and  `style` =#{style} 
+			</if>
+			<if test="dangci != null and dangci.trim() != ''">
+				and  `dangci` =#{dangci} 
+			</if>
+ 			<if test="userId != null ">
+				and   `user_id` =#{userId} 
+			</if>
+		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.hourse.cus.entity.PlanEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into t_plan
+		(
+			`size`, 
+			`geju`, 
+			`dangci`, 
+			`style`, 
+			`description`, 
+			`pic`, 
+			`price`, 
+			`yongshi`, 
+			`user_id`, 
+			`size_begin`, 
+			`size_end`, 
+			`cizhuan`, 
+			`diban`, 
+			`bizhi`, 
+			`men`, 
+			`weiyu`, 
+			`people1`, 
+			`people2`, 
+			`people3`, 
+			`people4`, 
+			`people5`, 
+			`peizhi`
+		)
+		values
+		(
+			#{size}, 
+			#{geju}, 
+			#{dangci}, 
+			#{style}, 
+			#{description}, 
+			#{pic}, 
+			#{price}, 
+			#{yongshi}, 
+			#{userId}, 
+			#{sizeBegin}, 
+			#{sizeEnd}, 
+			#{cizhuan}, 
+			#{diban}, 
+			#{bizhi}, 
+			#{men}, 
+			#{weiyu}, 
+			#{people1}, 
+			#{people2}, 
+			#{people3}, 
+			#{people4}, 
+			#{people5}, 
+			#{peizhi}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.hourse.cus.entity.PlanEntity">
+		update t_plan 
+		<set>
+			<if test="size != null">`size` = #{size}, </if>
+			<if test="geju != null">`geju` = #{geju}, </if>
+			<if test="dangci != null">`dangci` = #{dangci}, </if>
+			<if test="style != null">`style` = #{style}, </if>
+			<if test="description != null">`description` = #{description}, </if>
+			<if test="pic != null">`pic` = #{pic}, </if>
+			<if test="price != null">`price` = #{price}, </if>
+			<if test="yongshi != null">`yongshi` = #{yongshi}, </if>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="sizeBegin != null">`size_begin` = #{sizeBegin}, </if>
+			<if test="sizeEnd != null">`size_end` = #{sizeEnd}, </if>
+			<if test="cizhuan != null">`cizhuan` = #{cizhuan}, </if>
+			<if test="diban != null">`diban` = #{diban}, </if>
+			<if test="bizhi != null">`bizhi` = #{bizhi}, </if>
+			<if test="men != null">`men` = #{men}, </if>
+			<if test="weiyu != null">`weiyu` = #{weiyu}, </if>
+			<if test="people1 != null">`people1` = #{people1}, </if>
+			<if test="people2 != null">`people2` = #{people2}, </if>
+			<if test="people3 != null">`people3` = #{people3}, </if>
+			<if test="people4 != null">`people4` = #{people4}, </if>
+			<if test="people5 != null">`people5` = #{people5},</if>
+				<if test="peizhi != null">`peizhi` = #{peizhi} </if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from t_plan where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from t_plan where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

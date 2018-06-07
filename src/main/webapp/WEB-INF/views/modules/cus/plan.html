@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>报价</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="${request.contextPath}/static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="${request.contextPath}/static/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="${request.contextPath}/static/admin/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="${request.contextPath}/static/admin/css/animate.min.css" rel="stylesheet">
+    <link href="${request.contextPath}/static/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
+    <link href="${request.contextPath}/static/admin/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+</head>
+<style>
+.col-sm-31{
+width:40%;}
+.leftl1{
+float:left;
+}
+</style>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <!-- Panel Other -->
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>报价</h5>
+        </div>
+        <div class="ibox-content">
+            <div class="form-group clearfix col-sm-1">
+              <#if shiro.getUser().userType ==2 >
+                  <a href="${request.contextPath}/cus/plan/planadd.html">
+                    <button class="btn btn-outline btn-primary" type="button">添加装修方案</button>
+                </a>
+               </#if>
+            </div>
+			 
+            <!--搜索框开始-->
+            <form id='commentForm' role="form" method="post" class="form-horizontal m-t">
+                <div class="ibox-content">
+				<div class="form-group leftl">
+                            <label class="col-sm-3 control-label">面积：</label>
+                            <div class="input-group col-sm-4">
+                                <input id="size" type="text" class="form-control" name="size" required="" aria-required="true" value="">
+                            </div>
+                        </div>
+                        <div class="form-group leftl">
+                            <label class="col-sm-3 control-label">格局：</label>
+                            <div class="input-group col-sm-4">
+                                
+										     <select id="geju" class="form-control" name="geju" required="" aria-required="true">
+							   <option value="">请选择</option>
+					<#if geju?exists>  
+                             <#list geju as item>
+                                  <option value="${item.id}"   >${item.name}</option>
+				     </#list>  
+					</#if> 
+	 </select>
+                            </div>
+                        </div>
+				 <div class="form-group">
+                            <label class="col-sm-3 control-label">档次：</label>
+                            <div class="input-group col-sm-4">
+                                <select id="dangci" class="form-control" name="dangci" required="" aria-required="true">
+                                     <option value=""  >请选择</option>
+                                    <option value="1"    >普通</option>
+									<option value="2"   >精选</option>
+									<option value="3"   >豪华</option>
+									
+                                   
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">风格：</label>
+                            <div class="input-group col-sm-4">
+                                <select id="style" class="form-control" name="style" required="" aria-required="true">
+                                     <option value=""  >请选择</option>
+                                         <option value="1"    >现代简约风格</option>
+									<option value="2"   >欧式古典风格</option>
+									<option value="3"   >恬淡田园风格</option>
+									<option value="4"   >新中式风格</option>
+									<option value="5"   >地中海风格</option>
+                                   
+                                   
+                                </select>
+                            </div>
+                        </div>
+					 <div class="form-group">
+                            <label class="col-sm-3 control-label">瓷砖：</label>
+                            <div class="input-group col-sm-4">
+                               
+								     <select id="cizhuan" class="form-control" name="cizhuan" required="" aria-required="true">
+							   <option value="">请选择</option>
+					<#if cizhuan?exists>  
+                             <#list cizhuan as item>
+                                  <option value="${item.id}"   >${item.name}</option>
+				     </#list>  
+					</#if> 
+	 </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">地板：</label>
+                            <div class="input-group col-sm-4">
+                                <select id="diban" class="form-control" name="diban" required="" aria-required="true">
+							   <option value="">请选择</option>
+					<#if diban?exists>  
+                             <#list diban as item>
+                                  <option value="${item.id}"   >${item.name}</option>
+				     </#list>  
+					</#if> 
+	 </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">灯具：</label>
+                            <div class="input-group col-sm-4">
+                                 <select  id="bizhi" class="form-control" name="bizhi" required="" aria-required="true">
+							   <option value="">请选择</option>
+					<#if bizhi?exists>  
+                             <#list bizhi as item>
+                                  <option value="${item.id}"   >${item.name}</option>
+				     </#list>  
+					</#if> 
+	 </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">涂料：</label>
+                            <div class="input-group col-sm-4">
+                                
+								  <select id="men" class="form-control" name="men" required="" aria-required="true">
+							   <option value="">请选择</option>
+					<#if men?exists>  
+                             <#list men as item>
+                                  <option value="${item.id}"   >${item.name}</option>
+				     </#list>  
+					</#if> 
+	 </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">卫浴：</label>
+                            <div class="input-group col-sm-4">
+                               
+								  <select id="weiyu" class="form-control" name="weiyu" required="" aria-required="true">
+							   <option value="">请选择</option>
+					<#if weiyu?exists>  
+                             <#list weiyu as item>
+                                  <option value="${item.id}"   >${item.name}</option>
+				     </#list>  
+					</#if> 
+	 </select>
+                            </div>
+                        </div>
+                    <div class="form-group">
+					  <div class="col-sm-4 col-sm-offset-6">
+                        <button class="btn btn-primary" type="button" style="margin-top:5px" id="search"><strong>查看报价</strong>
+                        </button>
+                    </div>  </div>
+                </div>
+            </form>
+			  
+            <!--搜索框结束-->
+            <div class="example-wrap">
+                <div class="example">
+                    <table id="cusTable">
+                        <thead>
+                      
+						<th data-field="xuhao" data-formatter="xuhaoCode" >序号</th>
+                      
+                        <th data-field="size">面积</th>
+                      
+                        <th data-field="gejuName">格局</th>
+                      
+                        <th data-field="dangci" data-formatter="dangciCode">档次</th>
+                      
+                        <th data-field="style" data-formatter="styleCode">风格</th>
+                      
+                        <th data-field="peizhi">配置</th>
+                      
+                       
+                      
+                        <th data-field="totalPrice">预计费用</th>
+                      
+                        <th data-field="yongshi">预计用时</th>
+                      
+                        <th data-field="companyName">报价单位</th>
+                      
+                      
+                        <th data-field="phone">联系电话</th>
+                      
+						<th data-field="operate" data-formatter="operateCode">操作</th>
+                        
+                        </thead>
+                    </table>
+                </div>
+            </div>
+            <!-- End Example Pagination -->
+        </div>
+    </div>
+</div>
+<!-- End Panel Other -->
+</div>
+<script src="${request.contextPath}/static/admin/js/jquery.min.js?v=2.1.4"></script>
+<script src="${request.contextPath}/static/admin/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="${request.contextPath}/static/admin/js/content.min.js?v=1.0.0"></script>
+<script src="${request.contextPath}/static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="${request.contextPath}/static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+<script src="${request.contextPath}/static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="${request.contextPath}/static/admin/js/plugins/suggest/bootstrap-suggest.min.js"></script>
+<script src="${request.contextPath}/static/admin/js/plugins/layer/laydate/laydate.js"></script>
+<script src="${request.contextPath}/static/admin/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="${request.contextPath}/static/admin/js/plugins/layer/layer.min.js"></script>
+<script type="text/javascript">
+    function initTable() {
+        //先销毁表格
+        $('#cusTable').bootstrapTable('destroy');
+        //初始化表格,动态从服务器加载数据
+        $("#cusTable").bootstrapTable({
+            method: "post",  //使用get请求到服务器获取数据
+			contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+          
+            url: "${request.contextPath}/cus/plan/list", //获取数据的地址
+            striped: true,  //表格显示条纹
+            pagination: true, //启动分页
+            pageSize: 10,  //每页显示的记录数
+            pageNumber:1, //当前第几页
+            pageList: [5, 10, 15, 20, 25],  //记录数可选列表
+            sidePagination: "server", //表示服务端请求
+            paginationFirstText: "首页",
+            paginationPreText: "上一页",
+            paginationNextText: "下一页",
+            paginationLastText: "尾页",
+            queryParamsType : "undefined",
+            queryParams: function queryParams(params) {   //设置查询参数
+                var param = {
+                    page: params.pageNumber,
+                    limit: params.pageSize,
+					sidx:'',
+					order:'',
+                    sizetext:$('#size').val(),
+                    geju:$('#geju').val(),
+                    dangci:$('#dangci').val(),
+                    style:$('#style').val(),
+                    cizhuan:$('#cizhuan').val(),
+                    diban:$('#diban').val(),
+                    bizhi:$('#bizhi').val(),
+                    men:$('#men').val(),
+                    weiyu:$('#weiyu').val() 
+                };
+                return param;
+            },
+            onLoadSuccess: function(res){  //加载成功时执行
+                if(111 == res.code){
+                    window.location.reload();
+                }
+                layer.msg("加载成功", {time : 1000});
+            },
+			 
+            onLoadError: function(){  //加载失败时执行
+                layer.msg("加载数据失败");
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        //调用函数，初始化表格
+        initTable();
+
+        //当点击查询按钮的时候执行
+        $("#search").bind("click", initTable);
+    });
+	 function xuhaoCode(value, row, index){
+	return index+1;
+	 }
+	 function styleCode(value){
+		 if(value==1){return "现代简约风格";}
+		 if(value==2){return "欧式古典风格";}
+		 if(value==3){return "恬淡田园风格";}
+		 if(value==4){return "新中式风格";}
+		 if(value==5){return "现代简约风格";}
+	 }
+	  function dangciCode(value){
+	 if(value==1){return "普通";}
+	 if(value==2){return "精选";}
+	 if(value==3){return "豪华";}
+	 }
+	function operateCode(value, row, index){
+        var array=new Array();
+		 
+	//	array.push('<a href="${request.contextPath}/cus/plan/planedit.html?id='+row.id+'"><button type="button" class="btn btn-primary btn-sm"><i class="fa fa-paste"></i> 编辑</button></a>');
+		 
+		 	 	 
+		array.push('<a href=\"javascript:show(\''+row.description+'\')\"><button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> 查看方案介绍</button></a>');
+		 
+		return array.join("");
+    }
+	function show(description){
+	layer.alert(description, {title: '方案介绍'});
+	}
+	
+    function userDel(id){
+	var ids=new Array();
+	ids.push(id);
+        layer.confirm('确认删除?', {icon: 3, title:'提示'}, function(index){
+             $.ajax({
+                    type: "POST",
+                    url: "${request.contextPath}/cus/plan/delete",
+                    contentType: "application/json",
+                    data: JSON.stringify(ids),
+					 dataType: 'json',
+                    success: function(res){
+				 
+                        if(0 == res.code){
+						layer.alert('删除成功', {title: '友情提示', icon: 1, closeBtn: 0}, function(){
+                        initTable();
+                    });
+					}else if(111 == res.code){
+						window.location.reload();
+					}else{
+						layer.alert(res.msg, {title: '友情提示', icon: 2});
+					}
+                    }
+                });
+             
+
+            layer.close(index);
+        })
+
+    }
+</script>
+</body>
+</html>
